@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Scent Cartel | Premium Fragrances</title>
+<meta name="description" content="The Scent Cartel: premium perfumes for men, women and unisex. Prices in PKR.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap">
+<style>
+:root{color-scheme:light;--fg:#111;--mut:#666;--line:#e9e5dc;--soft:#faf8f4;--gold:#a8864f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--fg);font:15px/1.6 Inter,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}h1,h2,h3,.brand{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;margin:0 0 .4em}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05}h2{font-size:2rem}h3{font-size:1.25rem}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 20px}.mut{color:var(--mut)}
+.note{background:var(--soft);text-align:center;font-size:12px;padding:6px 10px;color:var(--mut)}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:#fff;border-bottom:1px solid var(--line);z-index:20}
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 20px;max-width:1180px;margin:0 auto}
+.brand{font-size:clamp(1.3rem,4vw,2rem);letter-spacing:.18em;text-align:center;margin:0}
+.g{display:flex;gap:6px;align-items:center}.g.r{justify-content:flex-end}
+.ic{background:none;border:0;cursor:pointer;padding:8px;color:var(--fg);position:relative;display:inline-flex}
+.ic b{position:absolute;top:0;right:-2px;background:var(--fg);color:#fff;border-radius:9px;font-size:10px;min-width:16px;height:16px;line-height:16px;text-align:center}
+nav{display:flex;justify-content:center;gap:26px;padding:0 20px 10px;flex-wrap:wrap}
+nav a{font-size:13px;letter-spacing:.06em;padding:2px 0;border-bottom:1px solid transparent}nav a:hover,nav a.on{border-color:var(--gold)}
+#menuBtn{display:none}
+#sbar{border-top:1px solid var(--line);padding:12px 20px;position:relative}#sbar form{max-width:600px;margin:auto;display:flex;gap:8px}
+#sug{max-width:600px;margin:6px auto 0;background:#fff;border:1px solid var(--line)}#sug a{display:block;padding:8px 12px}#sug a:hover{background:var(--soft)}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid #cfc9bc;background:#fff;width:100%;border-radius:0}
+input[type=checkbox],input[type=radio]{width:auto}
+.btn{display:inline-block;background:var(--fg);color:#fff;border:1px solid var(--fg);padding:11px 22px;cursor:pointer;font:inherit;font-size:13px;letter-spacing:.06em;transition:.2s}
+.btn:hover{background:#333}.btn.o{background:#fff;color:var(--fg)}.btn.o:hover{background:var(--soft)}.btn:disabled{opacity:.45;cursor:not-allowed}.btn.s{padding:8px 12px;font-size:12px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;min-height:70vh}
+.hero .art{background:var(--soft);display:flex;justify-content:center;padding:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;gap:6px}.card .im{background:var(--soft);padding:22px;display:flex;justify-content:center;position:relative}
+.card .im button.w{position:absolute;top:8px;right:8px}.tag{font-size:11px;color:var(--gold)}.old{text-decoration:line-through;color:var(--mut);margin-left:6px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tile{background:var(--soft);padding:50px 20px;text-align:center;border:1px solid var(--line)}.tile:hover{border-color:var(--gold)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0}.bar select{width:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}.f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:13px;margin:10px 0 4px}.err{color:#b00020;font-size:13px;min-height:1.2em}
+table{width:100%;border-collapse:collapse}td,th{padding:10px 6px;border-bottom:1px solid var(--line);text-align:left}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.box{background:#fff;max-width:560px;width:100%;padding:24px;max-height:90vh;overflow:auto}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:#fff;padding:10px 18px;font-size:13px;z-index:60;opacity:0;pointer-events:none;transition:.25s}#toast.on{opacity:1}
+footer{background:var(--soft);border-top:1px solid var(--line);margin-top:40px}footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px}
+footer a{display:block;color:var(--mut);padding:2px 0}
+.chat{display:flex;flex-direction:column;height:100%;min-height:360px}.msgs{flex:1;overflow:auto;padding:10px;background:var(--soft);display:flex;flex-direction:column;gap:8px;min-height:240px;max-height:380px}
+.m{padding:8px 12px;max-width:85%;border:1px solid var(--line);background:#fff}.m.u{align-self:flex-end;background:var(--fg);color:#fff}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:8px 0}.chips button{border:1px solid var(--line);background:#fff;padding:5px 10px;font-size:12px;cursor:pointer}
+#cw{position:fixed;right:16px;bottom:16px;z-index:40}#cp{display:none;width:min(360px,calc(100vw - 32px));background:#fff;border:1px solid var(--line);padding:12px;margin-bottom:10px;box-shadow:0 8px 30px rgba(0,0,0,.12)}#cp.on{display:block}
+@media(max-width:820px){.hero,.two{grid-template-columns:1fr}.tiles{grid-template-columns:1fr}#menuBtn{display:inline-flex}nav{display:none;flex-direction:column;align-items:center;gap:10px}nav.open{display:flex}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header>
+<div class="top">
+<div class="g"><button class="ic" id="menuBtn" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+<button class="ic" id="sBtn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg></button></div>
+<a href="#/" class="brand">THE SCENT CARTEL</a>
+<div class="g r"><a href="#/account" class="ic" aria-label="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg></a>
+<a href="#/cart" class="ic" aria-label="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 12H6zM9 8a3 3 0 016 0"/></svg><b id="cc">0</b></a></div>
+</div>
+<nav id="nav"><a href="#/">Home</a><a href="#/perfumes">All Perfumes</a><a href="#/men">Men</a><a href="#/women">Women</a><a href="#/unisex">Unisex</a><a href="#/about">About Us</a><a href="#/contact">Contact</a><a href="#/faq">FAQ</a></nav>
+<div id="sbar" hidden><form id="sf"><input id="si" type="search" placeholder="Search perfumes, notes, families" autocomplete="off" aria-label="Search"><button class="btn">Search</button><button type="button" class="btn o" id="sx">Clear</button></form><div id="sug" hidden></div></div>
+</header>
+<main id="app"></main>
+<footer><div class="wrap"><div class="cols">
+<div><h3>THE SCENT CARTEL</h3><p class="mut">Premium fragrances for Pakistan.</p></div>
+<div><b>Shop</b><a href="#/perfumes">All Perfumes</a><a href="#/men">Men</a><a href="#/women">Women</a><a href="#/unisex">Unisex</a></div>
+<div><b>Support</b><a href="#/faq">FAQ</a><a href="#/contact">Contact</a><a href="#/shipping">Shipping Policy</a><a href="#/returns">Returns Policy</a><a href="#/privacy">Privacy Policy</a><a href="#/terms">Terms</a></div>
+<div><b>Payments</b><p class="mut">Payment options are shown at checkout.</p><b>Newsletter</b><form id="nl" class="row" style="margin-top:6px"><input type="email" placeholder="Email address" aria-label="Email" style="flex:1;min-width:0"><button class="btn s">Join</button></form></div>
+</div><p class="mut" style="font-size:12px;margin-top:20px">© The Scent Cartel. Social links: not configured yet.</p></div></footer>
+<div id="cw"><div id="cp"><div id="cwb"></div></div><button class="btn" id="cb">Ask our assistant</button></div>
+<div id="toast" role="status"></div>
+<script>
+(function(){
+"use strict";
+var CFG={ship:250,free:8000,coupon:"WELCOME10",pct:10,lim:20};
+var API="/api";
+var PAYM=[{id:"cod",label:"Cash on Delivery"},{id:"bank",label:"Bank Transfer"}];
+function payRadios(){return PAYM.map(function(m,i){return'<label><input type="radio" name="pay" value="'+m.id+'"'+(i?"":" checked")+'> '+esc(m.label)+'</label>'}).join("")}
+function payLabel(id){return(PAYM.filter(function(m){return m.id===id})[0]||{label:id}).label}
+var $=function(s){return document.querySelector(s)};
+var mem={};
+var S={get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return mem[k]!==undefined?mem[k]:d}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){mem[k]=v}}};
+var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
+var fmt=function(n){return"PKR "+Number(n).toLocaleString("en-PK")};
+var GL={men:"Men",women:"Women",unisex:"Unisex"};
+var GK={m:"men",w:"women",u:"unisex"};
+var COL=["#1b1b1b","#34495e","#8a6a43","#3b2417","#a4324a","#9c8566","#c9a24b","#cfc8b8"];
+/* Catalogue: name | m=Men w=Women u=Unisex | 5ml price | 10ml price */
+var RAW=["Rasasi Hawas|m|700|1250","Rasasi Hawas Ice|m|800|1400","Rasasi Hawas Tropical|m|700|1250","French Tobacco|u|650|1200","Vintage Tobacco|u|850|1600","Rayhaan Pacific Aura|m|600|1200","Afnan Supremacy Collector’s Edition|m|1000|2000","Afnan 9PM Night Out|m|900|1800","Lattafa Khamrah Waha|u|900|1700","Lattafa Anham|u|700|1300","Club de Nuit Woman|w|700|1300","CDNIM Pure Parfum|m|800|1500","Bleu de Chanel Parfum|m|3200|5500","Dior Sauvage Parfum|m|1800|3400","YSL Y EDP|m|1900|3600","Office for Men|m|1600|3000","Chanel Allure Homme Sport Extreme|m|2700|5200","D&G Light Blue Intense|m|1500|2800","Acqua di Gio Profondo|m|1800|3400","Versace Eros EDP|m|1500|2800","JPG La Femme Le Parfum|w|1800|3400","Tom Ford Black Orchid EDP|u|2000|4000","Parfums de Marly Layton|u|3000|6000","Viktor & Rolf Spicebomb Extreme|m|1500|2800","Stronger With You Intensely|m|1600|3100","Givenchy Gentleman Reserve Privée|m|1600|3000","Hermès Terre d’Hermès EDT|m|1400|2600","Nishane Hacivat|u|2500|4800"];
+var PR=RAW.map(function(r,i){var a=r.split("|");return{id:i+1,n:a[0],g:GK[a[1]],p5:+a[2],p10:+a[3],slug:a[0].normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),col:COL[i%COL.length]}});
+var byId=function(i){return PR.filter(function(p){return p.id==i})[0]};
+var up=function(p,sz){return sz===10?p.p10:p.p5};
+var lbl=function(p,sz){return p.n+" "+sz+"ml"};
+var opts=function(p){return'<option value="5">5 ml · '+fmt(p.p5)+'</option><option value="10">10 ml · '+fmt(p.p10)+'</option>'};
+function bottle(c,w){return'<svg viewBox="0 0 100 130" width="'+(w||110)+'" role="img" aria-label="Perfume bottle illustration"><rect x="40" y="6" width="20" height="16" fill="#111"/><rect x="44" y="22" width="12" height="8" fill="#a8864f"/><rect x="14" y="30" width="72" height="92" rx="6" fill="'+c+'"/><rect x="22" y="38" width="10" height="76" fill="#fff" opacity=".25"/><rect x="34" y="62" width="40" height="30" fill="#fff" opacity=".85"/><rect x="40" y="72" width="28" height="3" fill="#111"/><rect x="46" y="80" width="16" height="2" fill="#a8864f"/></svg>'}
+function pic(p,w){return'<img src="images/'+p.slug+'.jpg" alt="'+esc(p.n)+' decant" width="'+Math.round(w*1.8)+'" style="max-width:100%;height:auto;object-fit:contain" loading="lazy" data-col="'+p.col+'" data-w="'+w+'">'}
+document.addEventListener("error",function(e){var t=e.target;if(t&&t.tagName==="IMG"&&t.dataset.col){var d=document.createElement("span");d.innerHTML=bottle(t.dataset.col,+t.dataset.w);t.replaceWith(d.firstChild)}},true);
+function hero(){return'<img src="images/hero-banner.jpg" alt="The Scent Cartel" style="max-width:100%;height:auto;object-fit:cover">';}
+var wish=S.get("wish",[]);
+function card(p){return'<div class="card"><a href="#/product/'+p.slug+'" class="im">'+pic(p,110)+'</a><button class="ic w" data-a="wish" data-id="'+p.id+'" aria-label="Wishlist" style="position:absolute;margin:8px 0 0 0">'+(wish.indexOf(p.id)>-1?"♥":"♡")+'</button><a href="#/product/'+p.slug+'"><h3 style="margin:0">'+esc(p.n)+'</h3></a><div class="mut">'+GL[p.g]+' · Decant</div><select id="z'+p.id+'" aria-label="Size for '+esc(p.n)+'">'+opts(p)+'</select><div class="row"><button class="btn o s" data-a="qv" data-id="'+p.id+'">Quick View</button><button class="btn s" data-a="add" data-id="'+p.id+'">Add to Cart</button><button class="btn o s" data-a="buy" data-id="'+p.id+'">Buy Now</button></div></div>'}
+var app=$("#app");
+var cart=S.get("cart",[]);
+function saveCart(){S.set("cart",cart);$("#cc").textContent=cart.reduce(function(a,i){return a+i.q},0)}
+var tt;function toast(m){var t=$("#toast");t.textContent=m;t.className="on";clearTimeout(tt);tt=setTimeout(function(){t.className=""},2200)}
+function add(i,q,sz){sz=sz===10?10:5;var p=byId(i);if(!p)return false;var l=cart.filter(function(x){return x.id==i&&x.sz===sz})[0];var nq=(l?l.q:0)+q;if(nq>CFG.lim){toast("Maximum "+CFG.lim+" per item");return false}if(l)l.q=nq;else cart.push({id:i,q:q,sz:sz});saveCart();return true}
+function lines(items){return items.map(function(i){var p=byId(i.id),z=i.sz===10?10:5;return{p:p,q:i.q,sz:z,u:p?up(p,z):0}}).filter(function(l){return l.p})}
+function totals(ls){var sub=ls.reduce(function(a,l){return a+l.u*l.q},0);var disc=S.get("coupon","")===CFG.coupon?Math.round(sub*CFG.pct/100):0;var ship=sub===0?0:(sub-disc>=CFG.free?0:CFG.ship);return{sub:sub,disc:disc,ship:ship,total:sub-disc+ship}}
+var T="The Scent Cartel";
+/* search */
+var WORDS={men:["men","mens","male","man"],women:["women","womens","female"],unisex:["unisex"]};
+function words(s){return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)}
+function score(p,q){var t=words(q);if(!t.length)return 1;var hw=words(p.n).concat(WORDS[p.g]);var sc=0;t.forEach(function(x){if(hw.some(function(w){return w.indexOf(x)===0}))sc++});return sc}
+/* shop */
+var F={};
+function shop(title,base,Q){T=title;F={g:base.g||Q.get("g")||"",max:+Q.get("max")||0,sort:Q.get("q")?"rel":"def",n:12,q:Q.get("q")||"",fixed:!!base.g};
+app.innerHTML='<div class="wrap"><h1>'+esc(title)+'</h1><p class="mut" id="cnt"></p><div class="bar">'+(F.fixed?"":'<select data-f="g" aria-label="Category"><option value="">All categories</option><option value="men">Men</option><option value="women">Women</option><option value="unisex">Unisex</option></select>')+'<select data-f="max" aria-label="Price"><option value="0">Any price</option><option value="800">5 ml up to PKR 800</option><option value="1500">5 ml up to PKR 1,500</option><option value="3000">5 ml up to PKR 3,000</option></select><select data-f="sort" aria-label="Sort"><option value="def">Default</option><option value="pa">Price: low to high</option><option value="pd">Price: high to low</option><option value="az">A to Z</option>'+(F.q?'<option value="rel">Relevance</option>':"")+'</select><button class="btn o s" data-a="clear">Clear filters</button></div><div id="grid" class="grid"></div><div style="text-align:center;margin-top:24px" id="more"></div></div>';
+sync();draw()}
+function sync(){document.querySelectorAll("[data-f]").forEach(function(e){e.value=F[e.dataset.f]})}
+function draw(){var a=PR.filter(function(p){return(!F.g||p.g===F.g)&&(!+F.max||p.p5<=+F.max)&&(!F.q||score(p,F.q)>0)});
+var s=F.sort;a.sort(function(x,y){return s==="rel"?score(y,F.q)-score(x,F.q):s==="pa"?x.p5-y.p5:s==="pd"?y.p5-x.p5:s==="az"?x.n.localeCompare(y.n):x.id-y.id});
+$("#cnt").textContent=a.length+" perfume"+(a.length===1?"":"s")+(F.q?' for "'+F.q+'"':"")+" · sold as 5 ml and 10 ml decants";
+$("#grid").innerHTML=a.slice(0,F.n).map(card).join("")||'<div style="grid-column:1/-1;padding:40px 0"><h3>No perfumes match</h3><p class="mut">Try clearing filters, or browse <a href="#/men"><u>Men</u></a>, <a href="#/women"><u>Women</u></a> or <a href="#/unisex"><u>Unisex</u></a>.</p></div>';
+$("#more").innerHTML=a.length>F.n?'<button class="btn o" data-a="more">Load more</button>':""}
+/* views */
+function cnt(g){return PR.filter(function(p){return p.g===g}).length}
+function home(){T="The Scent Cartel | Premium Fragrances";
+var feat=[1,13,22,11].map(byId),min5=Math.min.apply(null,PR.map(function(p){return p.p5})),min10=Math.min.apply(null,PR.map(function(p){return p.p10}));
+app.innerHTML='<div class="wrap hero"><div><h1>Fragrance with presence.</h1><p class="mut" style="max-width:440px">Try popular designer, Arabian and niche perfumes in 5 ml and 10 ml decants, delivered across Pakistan.</p><a class="btn" href="#/perfumes">Shop Now</a></div><div class="art">'+hero()+'</div></div>'+
+'<div class="wrap"><div class="tiles"><a class="tile" href="#/men"><h2>Men</h2><span class="mut">'+cnt("men")+' perfumes</span></a><a class="tile" href="#/women"><h2>Women</h2><span class="mut">'+cnt("women")+' perfumes</span></a><a class="tile" href="#/unisex"><h2>Unisex</h2><span class="mut">'+cnt("unisex")+' perfumes</span></a></div></div>'+
+'<div class="wrap"><div class="row" style="justify-content:space-between"><h2>Featured fragrances</h2><a href="#/perfumes"><u>View all</u></a></div><div class="grid">'+feat.map(card).join("")+'</div></div>'+
+'<div class="wrap"><div class="tiles" style="grid-template-columns:repeat(2,1fr)"><a class="tile" href="#/perfumes"><h3>5 ml decant</h3><span class="mut">From '+fmt(min5)+'</span></a><a class="tile" href="#/perfumes"><h3>10 ml decant</h3><span class="mut">From '+fmt(min10)+'</span></a></div></div>'+
+'<div class="wrap" style="background:var(--soft)"><h2>Find your signature scent</h2><form id="fs" class="row"><select id="fg" aria-label="For"><option value="">For anyone</option><option value="men">Men</option><option value="women">Women</option><option value="unisex">Unisex</option></select><select id="ff" aria-label="Budget"><option value="0">Any budget</option><option value="800">5 ml up to PKR 800</option><option value="1500">5 ml up to PKR 1,500</option><option value="3000">5 ml up to PKR 3,000</option></select><button class="btn">Show matches</button></form></div>'+
+'<div class="wrap two"><div><h2>Our story</h2><p class="mut">The Scent Cartel is a fragrance house built around a simple idea: a good perfume should be easy to choose and easy to love.</p><a class="btn o" href="#/about">About Us</a></div><div><h2>Customer reviews</h2><p class="mut">No reviews yet. Reviews will appear here once customers have shared them.</p></div></div>'+
+'<div class="wrap"><div class="tiles"><div class="tile"><h3>Cash on Delivery</h3><span class="mut">Pay when your order arrives.</span></div><div class="tile"><h3>Free delivery over '+fmt(CFG.free)+'</h3><span class="mut">Otherwise '+fmt(CFG.ship)+' flat.</span></div><div class="tile"><h3>Real support</h3><span class="mut">Ask our assistant or <a href="#/contact"><u>contact us</u></a>.</span></div></div></div>'}
+function prod(slug){var p=PR.filter(function(x){return x.slug===slug})[0];if(!p){T="Not found";app.innerHTML='<div class="wrap"><h1>Product not found</h1><p>This perfume is unavailable or has been removed.</p><a class="btn" href="#/perfumes">Browse all perfumes</a></div>';return}
+T=p.n+" | The Scent Cartel";var rel=PR.filter(function(x){return x.g===p.g&&x.id!==p.id}).slice(0,4);
+app.innerHTML='<div class="wrap two"><div class="hero art" style="min-height:0;display:flex">'+pic(p,260)+'</div><div><div class="mut">'+GL[p.g]+' · Decant</div><h1>'+esc(p.n)+'</h1><table><tr><th>Category</th><td>'+GL[p.g]+'</td></tr><tr><th>5 ml decant</th><td>'+fmt(p.p5)+'</td></tr><tr><th>10 ml decant</th><td>'+fmt(p.p10)+'</td></tr></table><p class="mut">Fragrance notes have not been added for this perfume yet.</p><div class="row" style="margin:18px 0"><select id="z'+p.id+'" style="width:auto" aria-label="Size">'+opts(p)+'</select><input id="qty" type="number" min="1" max="'+CFG.lim+'" value="1" style="width:80px" aria-label="Quantity"><button class="btn" data-a="add" data-pdp="1" data-id="'+p.id+'">Add to Cart</button><button class="btn o" data-a="buy" data-pdp="1" data-id="'+p.id+'">Buy Now</button><button class="btn o" data-a="wish" data-id="'+p.id+'">'+(wish.indexOf(p.id)>-1?"♥ Saved":"♡ Wishlist")+'</button></div><p class="mut">Delivery across Pakistan: '+fmt(CFG.ship)+' flat, free over '+fmt(CFG.free)+'. See <a href="#/shipping"><u>shipping</u></a> and <a href="#/returns"><u>returns</u></a>.</p><h3>Reviews</h3><p class="mut">No reviews yet.</p></div></div><div class="wrap"><h2>You may also like</h2><div class="grid">'+rel.map(card).join("")+'</div></div>'}
+function cartV(){T="Cart | The Scent Cartel";var ls=lines(cart);if(!ls.length){app.innerHTML='<div class="wrap" style="text-align:center"><h1>Your cart is empty</h1><a class="btn" href="#/perfumes">Continue Shopping</a></div>';return}
+var t=totals(ls);app.innerHTML='<div class="wrap"><h1>Your cart</h1><table>'+ls.map(function(l){return'<tr><td>'+pic(l.p,40)+'</td><td><a href="#/product/'+l.p.slug+'"><b>'+esc(lbl(l.p,l.sz))+'</b></a><br><span class="mut">'+fmt(l.u)+' each</span></td><td><button class="btn o s" data-a="dec" data-id="'+l.p.id+'" data-sz="'+l.sz+'" aria-label="Decrease">−</button> '+l.q+' <button class="btn o s" data-a="inc" data-id="'+l.p.id+'" data-sz="'+l.sz+'" aria-label="Increase">+</button></td><td>'+fmt(l.u*l.q)+'</td><td><button class="btn o s" data-a="rm" data-id="'+l.p.id+'" data-sz="'+l.sz+'">Remove</button></td></tr>'}).join("")+'</table><div class="row" style="margin:16px 0"><input id="cpn" placeholder="Coupon code" style="max-width:200px" value="'+esc(S.get("coupon",""))+'"><button class="btn o" data-a="coupon">Apply</button></div><p>Subtotal: '+fmt(t.sub)+'<br>Discount: −'+fmt(t.disc)+'<br>Shipping: '+(t.ship?fmt(t.ship):"Free")+'<br><b>Total: '+fmt(t.total)+'</b></p><a class="btn" href="#/checkout">Checkout</a> <a class="btn o" href="#/perfumes">Continue Shopping</a></div>'}
+function checkout(Q){T="Checkout | The Scent Cartel";var buy=Q.get("buy")?S.get("buy",null):null;var ls=lines(buy?[buy]:cart);
+if(!ls.length){app.innerHTML='<div class="wrap"><h1>Nothing to check out</h1><a class="btn" href="#/perfumes">Shop perfumes</a></div>';return}
+var t=totals(ls),u=S.get("user",{}),done=false;
+app.innerHTML='<div class="wrap two"><form id="co" novalidate><h1>Checkout</h1><h3>1. Your details</h3><label>Full name</label><input name="name" value="'+esc(u.name||"")+'" autocomplete="name"><div class="f2"><div><label>Email</label><input name="email" type="email" value="'+esc(u.email||"")+'"></div><div><label>Mobile (e.g. +923001234567)</label><input name="phone" inputmode="tel"></div></div><p class="mut" style="font-size:12px">Guest checkout is available. No account needed.</p><h3>2. Delivery address</h3><label>House / street</label><input name="addr"><div class="f2"><div><label>City</label><input name="city"></div><div><label>Province</label><select name="prov"><option value="">Select</option><option>Punjab</option><option>Sindh</option><option>Khyber Pakhtunkhwa</option><option>Balochistan</option><option>Islamabad Capital Territory</option><option>Gilgit-Baltistan</option><option>Azad Kashmir</option></select></div></div><div class="f2"><div><label>Postal code (optional)</label><input name="zip"></div><div><label>Delivery notes (optional)</label><input name="notes"></div></div><h3 style="margin-top:20px">3. Shipping</h3><p>Standard delivery: '+(t.ship?fmt(t.ship):"Free")+'. Delivery time will be confirmed by support.</p><h3>4. Payment</h3>'+payRadios()+'<p class="err" id="er" role="alert"></p><button class="btn" id="po">Place order · '+fmt(t.total)+'</button></form><div><h3>Order summary</h3>'+ls.map(function(l){return'<p>'+esc(lbl(l.p,l.sz))+' × '+l.q+' <span style="float:right">'+fmt(l.u*l.q)+'</span></p>'}).join("")+'<hr><p>Subtotal <span style="float:right">'+fmt(t.sub)+'</span></p><p>Discount <span style="float:right">−'+fmt(t.disc)+'</span></p><p>Shipping <span style="float:right">'+(t.ship?fmt(t.ship):"Free")+'</span></p><p><b>Total <span style="float:right">'+fmt(t.total)+'</span></b></p></div></div>';
+$("#co").addEventListener("submit",function(e){e.preventDefault();if(done)return;var f=e.target,v=function(n){return f.elements[n].value.trim()},er=$("#er");
+var m=!v("name")?"Enter your full name.":!/^\S+@\S+\.\S+$/.test(v("email"))?"Enter a valid email address.":!/^(\+92|0092|0)3\d{9}$/.test(v("phone").replace(/[\s-]/g,""))?"Enter a valid Pakistani mobile number, e.g. +923001234567.":!v("addr")?"Enter your house and street.":!v("city")?"Enter your city.":!v("prov")?"Select your province.":"";
+if(!m)ls.forEach(function(l){if(l.q>CFG.lim)m="Maximum "+CFG.lim+" per item."});
+if(m){er.textContent=m;return}
+done=true;$("#po").disabled=true;if(API){placeOrder(f,ls,buy,v,function(){done=false});return}var oid="TSC-"+Date.now().toString(36).toUpperCase();
+var o={id:oid,date:new Date().toISOString(),name:v("name"),email:v("email").toLowerCase(),phone:v("phone"),addr:v("addr")+", "+v("city")+", "+v("prov")+" "+v("zip"),pay:payLabel(f.elements.pay.value),items:ls.map(function(l){return{n:lbl(l.p,l.sz),q:l.q,p:l.u}}),t:t,status:"Pending confirmation",paid:"Pending"};
+var os=S.get("orders",[]);os.push(o);S.set("orders",os);if(buy)S.set("buy",null);else{cart=[];saveCart()}
+location.hash="#/order/"+oid})}
+function submitForm(r){var f=document.createElement("form");f.method="POST";f.action=r.url;Object.keys(r.fields).forEach(function(k){var i=document.createElement("input");i.type="hidden";i.name=k;i.value=r.fields[k];f.appendChild(i)});document.body.appendChild(f);f.submit()}
+function placeOrder(f,ls,buy,v,reset){var er=$("#er"),sig=ls.map(function(l){return l.p.id+":"+l.sz+":"+l.q}).join(","),key=S.get("idem",null);
+if(!key||key.sig!==sig){key={sig:sig,k:"k"+Date.now().toString(36)+Math.random().toString(36).slice(2,10)};S.set("idem",key)}
+var body={name:v("name"),email:v("email"),phone:v("phone"),addr:v("addr"),city:v("city"),prov:v("prov"),zip:v("zip"),notes:v("notes"),pay:f.elements.pay.value,coupon:S.get("coupon",""),key:key.k,items:ls.map(function(l){return{id:l.p.id,sz:l.sz,q:l.q}})};
+fetch(API+"/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})}).then(function(x){var j=x.j;
+if(!x.ok){var e=new Error(j.error||"Could not place the order.");e.isApi=true;throw e}
+if(j.duplicate){er.textContent="Your order was already received. Order number: "+j.id;return}
+var o=j.order;o.token=j.token;o.bank=j.bank||"";var os=S.get("orders",[]);os.push(o);S.set("orders",os);S.set("idem",null);
+if(buy)S.set("buy",null);else{cart=[];saveCart()}
+if(j.redirect)submitForm(j.redirect);else location.hash="#/order/"+o.id}).catch(function(e){er.textContent=e.isApi?e.message:"Something went wrong. Please try again.";$("#po").disabled=false;reset()})}
+function order(oid){T="Order confirmation | The Scent Cartel";var os=S.get("orders",[]),o=os.filter(function(x){return x.id===oid})[0];
+if(!o){app.innerHTML='<div class="wrap"><h1>Order not found</h1><p>Orders are saved only in the browser where they were placed.</p></div>';return}
+paintOrder(o);
+if(API&&o.token)fetch(API+"/orders/"+encodeURIComponent(oid)+"?token="+encodeURIComponent(o.token)).then(function(r){return r.ok?r.json():null}).then(function(n){if(!n||(n.paid===o.paid&&n.status===o.status))return;o.paid=n.paid;o.status=n.status;S.set("orders",os);if(location.hash.indexOf(oid)>-1)paintOrder(o)}).catch(function(){})}
+function paintOrder(o){var bank=o.pay==="Bank Transfer"?(o.bank?'<p>Bank transfer details:</p><pre style="white-space:pre-wrap;background:var(--soft);padding:12px">'+esc(o.bank)+'</pre>'+(API&&o.token?'<form id="rf" class="row"><input name="ref" placeholder="Payment reference (optional)" aria-label="Payment reference" style="flex:1"><button class="btn s">Submit reference</button></form>':""):'<p class="mut">Bank account details have not been configured yet. Support will share them with you.</p>'):o.pay==="Cash on Delivery"?'<p class="mut">Pay in cash when your order arrives.</p>':"";
+app.innerHTML='<div class="wrap" style="max-width:700px"><h1>Thank you, '+esc(o.name)+'</h1><p>Your order number is <b>'+esc(o.id)+'</b>.</p><table>'+o.items.map(function(i){return'<tr><td>'+esc(i.n)+' × '+i.q+'</td><td>'+fmt(i.p*i.q)+'</td></tr>'}).join("")+'<tr><td>Shipping</td><td>'+(o.t.ship?fmt(o.t.ship):"Free")+'</td></tr><tr><td><b>Total</b></td><td><b>'+fmt(o.t.total)+'</b></td></tr></table><p>Payment method: '+esc(o.pay)+'<br>Payment status: <b>'+esc(o.paid)+'</b><br>Order status: '+esc(o.status)+'<br>Deliver to: '+esc(o.addr)+'</p>'+bank+(API?"":'<p class="mut">Demo: this order is saved only in this browser and no email was sent.</p>')+'<a class="btn" href="#/perfumes">Continue Shopping</a></div>';
+var rf=$("#rf");if(rf)rf.addEventListener("submit",function(e){e.preventDefault();var ref=rf.elements.ref.value.trim();if(!ref)return;fetch(API+"/orders/"+encodeURIComponent(o.id)+"/payment-reference",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:o.token,reference:ref})}).then(function(r){toast(r.ok?"Reference received":"Could not send the reference")}).catch(function(){toast("Network error")})})}
+function sendContact(f,form,ce){fetch(API+"/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:f.name.value,email:f.email.value,phone:f.phone.value,subject:f.subject.value,message:f.msg.value,website:f.website.value})}).then(function(r){return r.json().then(function(j){if(!r.ok){var e=new Error(j.error||"Could not send.");e.isApi=true;throw e}return j})}).then(function(){S.set("lastmsg",Date.now());form.reset();ce.style.color="#1a7f37";ce.textContent="Thank you. Your message has been sent."}).catch(function(e){ce.style.color="#b00020";ce.textContent=e.isApi?e.message:"Could not send your message. Please try again."})}
+function boot(){var a=fetch(API+"/config").then(function(r){return r.json()}).then(function(c){CFG.ship=c.shipFee;CFG.free=c.freeOver;if(c.methods&&c.methods.length)PAYM=c.methods}).catch(function(){});
+var b=fetch(API+"/products").then(function(r){return r.json()}).then(function(list){list.forEach(function(x){var p=byId(x.id);if(p){p.p5=x.p5;p.p10=x.p10}})}).catch(function(){});
+return Promise.all([a,b])}
+function account(){T="My Account | The Scent Cartel";var u=S.get("user",null);
+if(!u){app.innerHTML='<div class="wrap" style="max-width:460px"><h1>Sign in or sign up</h1><p class="mut">Demo profile: name and email are saved in this browser only, with no password. Real login with password hashing, reset and verification needs a backend.</p><form id="lf" novalidate><label>Name</label><input name="name"><label>Email</label><input name="email" type="email"><p class="err" id="le" role="alert"></p><button class="btn">Continue</button></form></div>';
+$("#lf").addEventListener("submit",function(e){e.preventDefault();var n=e.target.elements.name.value.trim(),m=e.target.elements.email.value.trim().toLowerCase();if(!n||!/^\S+@\S+\.\S+$/.test(m)){$("#le").textContent="Enter your name and a valid email address.";return}S.set("user",{name:n,email:m});account()});return}
+var os=S.get("orders",[]).filter(function(o){return o.email===u.email}).reverse();
+app.innerHTML='<div class="wrap"><h1>Hello, '+esc(u.name)+'</h1><p class="mut">'+esc(u.email)+'</p><h2>My orders</h2>'+(os.length?'<table>'+os.map(function(o){return'<tr><td><a href="#/order/'+o.id+'"><u>'+o.id+'</u></a></td><td>'+fmt(o.t.total)+'</td><td>'+o.status+'</td><td>Payment: '+o.paid+'</td></tr>'}).join("")+'</table>':'<p class="mut">No orders yet.</p>')+'<p><button class="btn o" data-a="out">Sign out</button></p></div>'}
+function page(t,h){T=t+" | The Scent Cartel";app.innerHTML='<div class="wrap" style="max-width:760px"><h1>'+t+'</h1>'+h+'</div>'}
+var PL={shipping:["Shipping Policy","<p>Standard delivery across Pakistan costs "+fmt(CFG.ship)+". Orders of "+fmt(CFG.free)+" or more after discounts ship free.</p><p class='mut'>Delivery times and couriers have not been published yet. The store owner will add them here.</p>"],returns:["Returns and Exchange Policy","<p class='mut'>The returns and exchange policy has not been published yet. Please <a href='#/contact'><u>contact us</u></a> with any questions.</p>"],privacy:["Privacy Policy","<p class='mut'>Placeholder: the store owner must publish a privacy policy before launch. In this demo, details you enter are saved only in your own browser.</p>"],terms:["Terms and Conditions","<p class='mut'>Placeholder: the store owner must publish terms and conditions before launch.</p>"]};
+var FAQS=[["Which payment methods can I use in Pakistan?","The available payment options are shown at checkout."],["What is your returns and exchange policy?","The returns and exchange policy has not been published yet. Please contact support."],["How can I track my order?","Sign in on the Account page to see the status of your own orders. Order numbers start with TSC."],["What are the shipping and delivery charges?","Standard delivery costs "+fmt(CFG.ship)+". Orders of "+fmt(CFG.free)+" or more after discounts ship free."],["Do you have promo or discount codes?","The code "+CFG.coupon+" gives "+CFG.pct+"% off. Enter it in your cart."],["How do I place an order or check out?","Choose a size on any perfume, add it to your cart or use Buy Now, then enter your details, address and payment method at checkout. Guest checkout is available."],["How do I create an account or fix a login problem?","Use the Account page. This demo saves your name and email in your browser only."],["How can I contact customer support?","Use the Contact page. Phone and email details have not been configured yet."],["What are men, women and unisex fragrances?","Every perfume is listed under Men, Women or Unisex. Use the Men, Women and Unisex pages in the menu."],["What decant sizes do you offer?","All perfumes are sold as 5 ml and 10 ml decants. Each product page shows both prices."],["Tell me about The Scent Cartel.","The Scent Cartel is a fragrance house selling perfume decants for men, women and unisex wear in Pakistan."]];
+function faq(){T="FAQ | The Scent Cartel";app.innerHTML='<div class="wrap two"><div><h1>FAQ</h1>'+FAQS.map(function(f){return'<details style="border-bottom:1px solid var(--line);padding:10px 0"><summary><b>'+f[0]+'</b></summary><p class="mut">'+esc(f[1])+'</p></details>'}).join("")+'</div><div><h2>Ask the assistant</h2><div id="fc"></div></div></div>';mountChat($("#fc"))}
+function contact(){T="Contact | The Scent Cartel";app.innerHTML='<div class="wrap two"><div><h1>Contact us</h1><p class="mut">Business phone, email, hours and social links have not been configured yet.</p></div><form id="cf" novalidate><label>Name</label><input name="name"><label>Email</label><input name="email" type="email"><label>Mobile (optional)</label><input name="phone"><label>Subject</label><input name="subject"><label>Message</label><textarea name="msg" rows="5"></textarea><input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><p class="err" id="ce" role="alert"></p><button class="btn">Send message</button></form></div>';
+$("#cf").addEventListener("submit",function(e){e.preventDefault();var f=e.target.elements,ce=$("#ce"),last=S.get("lastmsg",0);ce.style.color="";
+if(Date.now()-last<30000){ce.textContent="Please wait a moment before sending another message.";return}
+if(!f.name.value.trim()||!/^\S+@\S+\.\S+$/.test(f.email.value.trim())||!f.subject.value.trim()||f.msg.value.trim().length<10){ce.textContent="Enter your name, a valid email, a subject and a message of at least 10 characters.";return}
+if(API){sendContact(f,e.target,ce);return}var ms=S.get("msgs",[]);ms.push({n:f.name.value,e:f.email.value,s:f.subject.value,m:f.msg.value,d:new Date().toISOString()});S.set("msgs",ms);S.set("lastmsg",Date.now());e.target.reset();ce.style.color="#1a7f37";ce.textContent="Message saved in this demo. It is not delivered anywhere until a backend is connected."})}
+function about(){page("About Us",'<p>The Scent Cartel is a fragrance house for people who want a perfume that feels personal. Our mission is to make choosing a scent clear and enjoyable.</p><p class="mut">Placeholder copy: the store owner will add the real brand story, sourcing and authenticity details here.</p><a class="btn" href="#/perfumes">Explore the collection</a>')}
+/* store assistant: answers only from the catalogue and approved FAQ text */
+var FB="I'm sorry, I don't have that information in my available store knowledge. Please contact our customer support team for assistance.";
+var STOP="what is your the a an of in to can i do you how are for my me on and or it does which there this that with have any show".split(" ");
+var BYLEN=PR.slice().sort(function(a,b){return b.n.length-a.n.length});
+var pl=function(p){return p.n+" (5 ml "+fmt(p.p5)+", 10 ml "+fmt(p.p10)+")"};
+function answer(q){var l=q.toLowerCase();
+if(/ignore (all|previous|your)|system prompt|api key|developer mode|jailbreak|password/.test(l))return FB;
+if(/(track|status|where).*order|my order/.test(l)){var u=S.get("user",null);if(!u)return"Please sign in on the Account page so I can look up your own orders.";var os=S.get("orders",[]).filter(function(o){return o.email===u.email});return os.length?"Your orders: "+os.map(function(o){return o.id+" ("+o.status+")"}).join(", "):"You have no orders yet."}
+var ln=l.normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+var named=BYLEN.filter(function(p){return ln.indexOf(p.n.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase())>-1})[0];
+if(named)return named.n+": "+GL[named.g]+" perfume. 5 ml decant "+fmt(named.p5)+", 10 ml decant "+fmt(named.p10)+". Fragrance notes have not been added to the store yet.";
+var g="",w=words(l);if(w.indexOf("unisex")>-1)g="unisex";else if(w.some(function(x){return WORDS.women.indexOf(x)>-1}))g="women";else if(w.some(function(x){return WORDS.men.indexOf(x)>-1}))g="men";
+var mx=l.match(/(?:under|below|less than)\s*(?:pkr|rs\.?)?\s*([\d,]+)/);mx=mx?+mx[1].replace(/,/g,""):0;
+if((g||mx)&&/perfume|fragrance|scent|cologne|decant|available|price|under|below|list|show|have/.test(l)){var r=PR.filter(function(p){return(!g||p.g===g)&&(!mx||p.p5<=mx)});return r.length?(g?GL[g]+" perfumes: ":"Perfumes: ")+r.map(pl).join("; ")+(mx?" (filtered by 5 ml price)":""):"No perfumes in the catalogue match that."}
+var qt=w.filter(function(x){return STOP.indexOf(x)<0&&x.length>2});if(!qt.length)return FB;
+var bc=0,pm=[];PR.forEach(function(p){var c=score(p,qt.join(" "));if(c>bc){bc=c;pm=[p]}else if(c===bc&&c>0)pm.push(p)});
+if(bc>0&&bc/qt.length>=.5)return"Matching perfumes: "+pm.slice(0,8).map(pl).join("; ");
+var best=null,bs=0;FAQS.forEach(function(f){var d=(f[0]+" "+f[1]).toLowerCase(),s=0;qt.forEach(function(x){if(d.indexOf(x)>-1||(x.length>5&&d.indexOf(x.slice(0,-2))>-1))s++});if(s>bs){bs=s;best=f}});
+return best&&bs/qt.length>=.5?best[1]:FB}
+var hist=[["b","Welcome to The Scent Cartel. Ask me about our perfumes, prices, payments, shipping or your orders."]];
+var SUG=["Which perfumes are available for men?","Show me unisex fragrances under PKR 1,500","What is the price of Dior Sauvage Parfum?","Which payment methods can I use in Pakistan?","What is your return policy?","How can I track my order?"];
+function mountChat(el){el.innerHTML='<div class="chat"><div class="msgs" aria-live="polite"></div><div class="chips">'+SUG.map(function(s){return'<button type="button">'+s+'</button>'}).join("")+'</div><form class="row" style="flex-wrap:nowrap"><input placeholder="Ask about our store" aria-label="Message" style="flex:1;min-width:0"><button class="btn">Send</button></form><div class="row" style="margin-top:6px"><button type="button" class="btn o s" data-c="clr">Clear conversation</button><a class="btn o s" href="#/contact">Contact support</a></div></div>';
+var box=el.querySelector(".msgs"),inp=el.querySelector("input");
+function paint(){box.innerHTML=hist.map(function(m){return'<div class="m '+(m[0]==="u"?"u":"")+'">'+esc(m[1])+'</div>'}).join("");box.scrollTop=box.scrollHeight}
+function ask(q){q=q.trim();if(!q)return;hist.push(["u",q.slice(0,300)]);paint();var ty=document.createElement("div");ty.className="m";ty.textContent="Typing…";box.appendChild(ty);
+setTimeout(function(){var a;try{a=answer(q)}catch(e){a="Something went wrong. Please try again."}hist.push(["b",a]);paint()},350)}
+el.querySelectorAll(".chips button").forEach(function(b){b.onclick=function(){ask(b.textContent)}});
+el.querySelector("form").onsubmit=function(e){e.preventDefault();ask(inp.value);inp.value=""};
+el.querySelector("[data-c=clr]").onclick=function(){hist=[hist[0]];paint()};paint()}
+/* router */
+function go(){var h=location.hash.slice(1)||"/",parts=h.split("?"),p=parts[0].split("/").filter(Boolean),Q=new URLSearchParams(parts[1]||""),r=p[0]||"";
+$("#nav").classList.remove("open");$("#sbar").hidden=true;
+try{if(!r)home();else if(r==="perfumes")shop("All Perfumes",{},Q);else if(r==="men"||r==="women"||r==="unisex")shop(r==="unisex"?"Unisex Perfumes":GL[r]+"'s Perfumes",{g:r},Q);else if(r==="search")shop("Search",{},Q);else if(r==="product")prod(p[1]);else if(r==="cart")cartV();else if(r==="checkout")checkout(Q);else if(r==="order")order(p[1]);else if(r==="account")account();else if(r==="about")about();else if(r==="contact")contact();else if(r==="faq")faq();else if(PL[r])page(PL[r][0],PL[r][1]);else{T="Not found";page("Page not found",'<a class="btn" href="#/">Back to home</a>')}}
+catch(e){console.error(e);app.innerHTML='<div class="wrap"><h1>Something went wrong</h1><a class="btn" href="#/">Back to home</a></div>'}
+document.title=T;document.querySelectorAll("nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#/"+r||(!r&&a.getAttribute("href")==="#/"))});window.scrollTo(0,0)}
+/* events */
+document.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a,i=+b.dataset.id,zs=$("#z"+i),sz=zs?+zs.value:5,q=b.dataset.pdp?Math.max(1,parseInt($("#qty").value,10)||1):1;
+if(a==="add"){if(add(i,q,sz))toast("Added to cart")}
+else if(a==="buy"){if(q>CFG.lim){toast("Maximum "+CFG.lim+" per item");return}S.set("buy",{id:i,q:q,sz:sz});location.hash="#/checkout?buy=1"}
+else if(a==="qv"){var p2=byId(i),m=document.createElement("div");m.className="modal";m.innerHTML='<div class="box" role="dialog" aria-modal="true"><div style="text-align:center">'+pic(p2,120)+'</div><h2>'+esc(p2.n)+'</h2><p class="mut">'+GL[p2.g]+' · Decant</p><p>5 ml: <b>'+fmt(p2.p5)+'</b><br>10 ml: <b>'+fmt(p2.p10)+'</b></p><div class="row"><a class="btn" href="#/product/'+p2.slug+'" data-a="close">View details</a><button class="btn o" data-a="close">Close</button></div></div>';m.addEventListener("click",function(ev){if(ev.target===m)m.remove()});document.body.appendChild(m)}
+else if(a==="close"){var md=b.closest(".modal");if(md)md.remove()}
+else if(a==="wish"){var k=wish.indexOf(i);if(k>-1)wish.splice(k,1);else wish.push(i);S.set("wish",wish);b.textContent=b.classList.contains("w")?(k>-1?"♡":"♥"):(k>-1?"♡ Wishlist":"♥ Saved")}
+else if(a==="inc"){if(add(i,1,+b.dataset.sz))cartV()}
+else if(a==="dec"){var z=+b.dataset.sz,l=cart.filter(function(x){return x.id==i&&x.sz===z})[0];if(l){l.q--;if(l.q<1)cart=cart.filter(function(x){return x!==l});saveCart();cartV()}}
+else if(a==="rm"){var z2=+b.dataset.sz;cart=cart.filter(function(x){return!(x.id==i&&x.sz===z2)});saveCart();cartV()}
+else if(a==="coupon"){var c=$("#cpn").value.trim().toUpperCase();if(c===CFG.coupon){S.set("coupon",c);toast("Coupon applied")}else{S.set("coupon","");toast(c?"Invalid coupon code":"Coupon removed")}cartV()}
+else if(a==="more"){F.n+=12;draw()}
+else if(a==="clear"){F={g:F.fixed?F.g:"",max:0,sort:"def",n:12,q:"",fixed:F.fixed};sync();draw()}
+else if(a==="out"){S.set("user",null);account()}});
+document.addEventListener("change",function(e){var k=e.target.dataset&&e.target.dataset.f;if(!k)return;F[k]=e.target.value;F.n=12;draw()});
+$("#menuBtn").onclick=function(){$("#nav").classList.toggle("open")};
+$("#sBtn").onclick=function(){var s=$("#sbar");s.hidden=!s.hidden;if(!s.hidden)$("#si").focus()};
+$("#sx").onclick=function(){$("#si").value="";$("#sug").hidden=true;$("#si").focus()};
+$("#si").addEventListener("input",function(){var q=this.value.trim(),s=$("#sug");if(!q){s.hidden=true;return}var r=PR.filter(function(p){return score(p,q)>0}).slice(0,6);s.innerHTML=r.length?r.map(function(p){return'<a href="#/product/'+p.slug+'">'+esc(p.n)+' <span class="mut">from '+fmt(p.p5)+'</span></a>'}).join(""):'<a href="#/perfumes">No matches. Browse all perfumes</a>';s.hidden=false});
+$("#sf").addEventListener("submit",function(e){e.preventDefault();var q=$("#si").value.trim();if(q)location.hash="#/search?q="+encodeURIComponent(q)});
+$("#sug").addEventListener("click",function(){$("#sbar").hidden=true});
+document.addEventListener("submit",function(e){if(e.target.id==="fs"){e.preventDefault();location.hash="#/perfumes?g="+$("#fg").value+"&max="+$("#ff").value}
+if(e.target.id==="nl"){e.preventDefault();var m=e.target.querySelector("input").value.trim();if(!/^\S+@\S+\.\S+$/.test(m)){toast("Enter a valid email address");return}if(API){fetch(API+"/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:m})}).then(function(r){toast(r.ok?"Thanks for subscribing":"Could not subscribe, please try again")}).catch(function(){toast("Network error")});e.target.reset();return}var n=S.get("news",[]);n.push(m);S.set("news",n);e.target.reset();toast("Thanks for subscribing (saved in this demo)")}});
+var cwOpen=false;$("#cb").onclick=function(){cwOpen=!cwOpen;$("#cp").classList.toggle("on",cwOpen);if(cwOpen)mountChat($("#cwb"));$("#cb").textContent=cwOpen?"Close assistant":"Ask our assistant"};
+window.addEventListener("hashchange",go);saveCart();if(API){boot().then(go)}else go();
+})();
+</script></body></html>

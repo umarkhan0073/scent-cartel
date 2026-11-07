@@ -1,0 +1,7 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // All access goes through the backend (service account). Block direct browser access.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

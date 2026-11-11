@@ -155,18 +155,19 @@ adm.use((req, res, next) => { const p = verify(cookie(req, "tsc_admin"), cfg.sec
 const audit = (action, detail) => db.collection("audit").add({ action, detail, at: new Date() }).catch((e) => console.error("audit failed", e.message));
 const strip = (d) => { const x = d.data(); delete x.tokenHash; for (const k of ["createdAt", "paidAt"]) if (x[k]) x[k] = iso(x[k]); return x; };
 adm.get("/me", (q, r) => r.json({ ok: true }));
-adm.get("/orders", h(async (q, r) => { r.json((await db.collection("orders").orderBy("createdAt", "desc").limit(200).get()).docs.map(strip)); }));
-adm.patch("/orders/:id", h(async (req, res) => {
-  const b = req.body || {}, u = {};
-  if (b.status !== undefined) { if (!ORDER_ST[b.status]) throw new HttpError(400, "Bad status."); u.status = b.status; }
-  if (b.paymentStatus !== undefined) { if (!PAY_ST[b.paymentStatus]) throw new HttpError(400, "Bad payment status."); u["payment.status"] = b.paymentStatus; }
-  if (b.paymentRef !== undefined) u["payment.ref"] = clean(b.paymentRef, 60);
-  const ref = db.collection("orders").doc(clean(req.params.id, 20));
-  if (!(await ref.get()).exists) throw new HttpError(404, "Order not found.");
-  await ref.update(u); audit("order.update", { id: req.params.id, ...u });
-  res.json({ ok: true });
+adm.get("/orders", h(async (q, r) => {
+  const snapshot = await db.collection("orders").limit(200).get();
+  const docs = snapshot.docs.map(strip);
+  docs.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+  r.json(docs);
 }));
-adm.get("/messages", h(async (q, r) => { r.json((await db.collection("messages").orderBy("createdAt", "desc").limit(200).get()).docs.map((d) => ({ id: d.id, ...d.data(), createdAt: iso(d.data().createdAt) }))); }));
+
+adm.get("/messages", h(async (q, r) => {
+  const snapshot = await db.collection("messages").limit(200).get();
+  const docs = snapshot.docs.map((d) => ({ id: d.id, ...d.data(), createdAt: iso(d.data().createdAt) }));
+  docs.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+  r.json(docs);
+}));
 adm.get("/products", h(async (q, r) => { r.json((await db.collection("products").get()).docs.map((d) => d.data()).sort((a, b) => a.id - b.id)); }));
 adm.put("/products/:id", h(async (req, res) => {
   const id = +req.params.id, b = req.body || {}, name = clean(b.name, 100);

@@ -2,7 +2,7 @@
 require("dotenv").config();
 const path = require("path"), crypto = require("crypto");
 const express = require("express"), helmet = require("helmet"), rateLimit = require("express-rate-limit");
-const cfg = require("./lib/config"), db = require("./lib/db"), mail = require("./lib/mail"), jc = require("./lib/jazzcash");
+const cfg = require("./config"), db = require("./db"), mail = require("./mail"), jc = require("./jazzcash");
 const { HttpError, sha, safeEq, clean, EMAIL, phone, slugify, genNo, sign, verify } = require("./lib/util");
 const { price } = require("./lib/pricing");
 

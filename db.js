@@ -1,5 +1,12 @@
-"use strict";
-const { Firestore } = require("@google-cloud/firestore");
-const db = new Firestore(process.env.GOOGLE_CLOUD_PROJECT ? { projectId: process.env.GOOGLE_CLOUD_PROJECT } : {});
-db.settings({ ignoreUndefinedProperties: true });
+const admin = require('firebase-admin');
+
+let credential;
+if (process.env.GOOGLE_CREDENTIALS) {
+  credential = admin.credential.cert(JSON.parse(process.env.GOOGLE_CREDENTIALS));
+} else {
+  credential = admin.credential.applicationDefault();
+}
+
+admin.initializeApp({ credential });
+const db = admin.firestore();
 module.exports = db;

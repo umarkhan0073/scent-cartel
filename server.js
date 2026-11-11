@@ -25,9 +25,11 @@ app.use(helmet({ contentSecurityPolicy: { useDefaults: false, directives: {
   "img-src": ["'self'", "data:"], "connect-src": ["'self'"],
   "form-action": ["'self'", ...(cfg.jc.on ? [new URL(cfg.jc.url).origin] : [])],
   "frame-ancestors": ["'none'"], "base-uri": ["'self'"], "object-src": ["'none'"] } } }));
+
+// Robust body parsers for all content types
 app.use(express.json({ limit: "50kb" }));
 app.use(express.urlencoded({ extended: true, limit: "50kb" }));
-app.use("/api/pay", express.urlencoded({ extended: false, limit: "50kb" }));
+
 const rl = (min, max, msg) => rateLimit({ windowMs: min * 60000, limit: max, standardHeaders: true, legacyHeaders: false, message: { error: msg } });
 app.use("/api", rl(15, 300, "Too many requests. Please slow down."));
 
@@ -204,14 +206,21 @@ adm.get("/products", h(async (q, r) => {
 }));
 
 adm.put("/products/:id", h(async (req, res) => {
-  const id = +req.params.id, b = req.body || {}, name = clean(b.name, 100);
-  if (!Number.isInteger(id) || id < 1 || id > 100000) throw new HttpError(400, "Bad id.");
-  if (!name || !["men", "women", "unisex"].includes(b.gender)) throw new HttpError(400, "Name and category are required.");
-  const p5 = +b.p5, p10 = +b.p10;
-  if (![p5, p10].every((n) => Number.isInteger(n) && n > 0 && n <= 1000000)) throw new HttpError(400, "Prices must be whole numbers above 0.");
-  const doc = { id, name, slug: slugify(name), gender: b.gender, p5, p10, active: !!b.active, soldOut: !!b.soldOut };
-  await db.collection("products").doc(String(id)).set(doc); audit("product.save", doc);
-  res.json(doc);
+  try {
+    const id = +req.params.id, b = req.body || {};
+    const name = clean(b.name, 100);
+    if (!Number.isInteger(id) || id < 1 || id > 100000) throw new HttpError(400, "Bad id.");
+    if (!name || !["men", "women", "unisex"].includes(b.gender)) throw new HttpError(400, "Name and category are required.");
+    const p5 = +b.p5, p10 = +b.p10;
+    if (![p5, p10].every((n) => Number.isInteger(n) && n > 0 && n <= 1000000)) throw new HttpError(400, "Prices must be whole numbers above 0.");
+    const doc = { id, name, slug: slugify(name), gender: b.gender, p5, p10, active: !!b.active, soldOut: !!b.soldOut };
+    await db.collection("products").doc(String(id)).set(doc); 
+    audit("product.save", doc);
+    res.json(doc);
+  } catch (err) {
+    console.error("Error saving product:", err);
+    throw err instanceof HttpError ? err : new HttpError(400, err.message || "Invalid product data.");
+  }
 }));
 
 adm.get("/coupons", h(async (q, r) => {
@@ -238,7 +247,7 @@ app.use("/api", (q, r) => r.status(404).json({ error: "Not found." }));
 app.use((err, req, res, next) => {
   if (err instanceof HttpError) return res.status(err.status).json({ error: err.message });
   if (err && err.type === "entity.parse.failed") return res.status(400).json({ error: "Invalid request." });
-  console.error(err);
+  console.error("Global Error Handler:", err);
   res.status(500).json({ error: "Something went wrong. Please try again." });
 });
 

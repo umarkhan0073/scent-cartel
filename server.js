@@ -155,20 +155,49 @@ adm.use((req, res, next) => { const p = verify(cookie(req, "tsc_admin"), cfg.sec
 const audit = (action, detail) => db.collection("audit").add({ action, detail, at: new Date() }).catch((e) => console.error("audit failed", e.message));
 const strip = (d) => { const x = d.data(); delete x.tokenHash; for (const k of ["createdAt", "paidAt"]) if (x[k]) x[k] = iso(x[k]); return x; };
 adm.get("/me", (q, r) => r.json({ ok: true }));
+
 adm.get("/orders", h(async (q, r) => {
-  const snapshot = await db.collection("orders").limit(200).get();
-  const docs = snapshot.docs.map(strip);
-  docs.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
-  r.json(docs);
+  try {
+    const snapshot = await db.collection("orders").limit(200).get();
+    const docs = snapshot.docs.map(strip);
+    docs.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+    r.json(docs);
+  } catch (e) {
+    r.json([]);
+  }
+}));
+
+adm.patch("/orders/:id", h(async (req, res) => {
+  const b = req.body || {}, u = {};
+  if (b.status !== undefined) { if (!ORDER_ST[b.status]) throw new HttpError(400, "Bad status."); u.status = b.status; }
+  if (b.paymentStatus !== undefined) { if (!PAY_ST[b.paymentStatus]) throw new HttpError(400, "Bad payment status."); u["payment.status"] = b.paymentStatus; }
+  if (b.paymentRef !== undefined) u["payment.ref"] = clean(b.paymentRef, 60);
+  const ref = db.collection("orders").doc(clean(req.params.id, 20));
+  if (!(await ref.get()).exists) throw new HttpError(404, "Order not found.");
+  await ref.update(u); audit("order.update", { id: req.params.id, ...u });
+  res.json({ ok: true });
 }));
 
 adm.get("/messages", h(async (q, r) => {
-  const snapshot = await db.collection("messages").limit(200).get();
-  const docs = snapshot.docs.map((d) => ({ id: d.id, ...d.data(), createdAt: iso(d.data().createdAt) }));
-  docs.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
-  r.json(docs);
+  try {
+    const snapshot = await db.collection("messages").limit(200).get();
+    const docs = snapshot.docs.map((d) => ({ id: d.id, ...d.data(), createdAt: iso(d.data().createdAt) }));
+    docs.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+    r.json(docs);
+  } catch (e) {
+    r.json([]);
+  }
 }));
-adm.get("/products", h(async (q, r) => { r.json((await db.collection("products").get()).docs.map((d) => d.data()).sort((a, b) => a.id - b.id)); }));
+
+adm.get("/products", h(async (q, r) => {
+  try {
+    const snapshot = await db.collection("products").get();
+    r.json(snapshot.docs.map((d) => d.data()).sort((a, b) => a.id - b.id));
+  } catch (e) {
+    r.json([]);
+  }
+}));
+
 adm.put("/products/:id", h(async (req, res) => {
   const id = +req.params.id, b = req.body || {}, name = clean(b.name, 100);
   if (!Number.isInteger(id) || id < 1 || id > 100000) throw new HttpError(400, "Bad id.");
@@ -179,7 +208,16 @@ adm.put("/products/:id", h(async (req, res) => {
   await db.collection("products").doc(String(id)).set(doc); audit("product.save", doc);
   res.json(doc);
 }));
-adm.get("/coupons", h(async (q, r) => { r.json((await db.collection("coupons").get()).docs.map((d) => ({ code: d.id, ...d.data() }))); }));
+
+adm.get("/coupons", h(async (q, r) => {
+  try {
+    const snapshot = await db.collection("coupons").get();
+    r.json(snapshot.docs.map((d) => ({ code: d.id, ...d.data() })));
+  } catch (e) {
+    r.json([]);
+  }
+}));
+
 adm.put("/coupons/:code", h(async (req, res) => {
   const code = clean(req.params.code, 30).toUpperCase(), pct = +req.body.pct;
   if (!/^[A-Z0-9_-]{1,30}$/.test(code) || !Number.isInteger(pct) || pct < 1 || pct > 90) throw new HttpError(400, "Code must be letters/numbers and the percentage 1 to 90.");

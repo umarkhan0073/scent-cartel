@@ -26,6 +26,7 @@ app.use(helmet({ contentSecurityPolicy: { useDefaults: false, directives: {
   "form-action": ["'self'", ...(cfg.jc.on ? [new URL(cfg.jc.url).origin] : [])],
   "frame-ancestors": ["'none'"], "base-uri": ["'self'"], "object-src": ["'none'"] } } }));
 app.use(express.json({ limit: "50kb" }));
+app.use(express.urlencoded({ extended: true, limit: "50kb" }));
 app.use("/api/pay", express.urlencoded({ extended: false, limit: "50kb" }));
 const rl = (min, max, msg) => rateLimit({ windowMs: min * 60000, limit: max, standardHeaders: true, legacyHeaders: false, message: { error: msg } });
 app.use("/api", rl(15, 300, "Too many requests. Please slow down."));
